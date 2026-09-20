@@ -1,4 +1,4 @@
-const CACHE_NAME = "ezra-dcp-bucket-list-v7";
+const CACHE_NAME = "ezra-dcp-bucket-list-v8";
 const APP_SHELL = [
   "./",
   "./index.html",
