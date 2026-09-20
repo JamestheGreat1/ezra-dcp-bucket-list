@@ -1,6 +1,6 @@
-# Ezra DCP Bucket List
+# Ezra's DCP BBL
 
-A personal Disney College Program completionist tracker for Ezra.
+Ezra's Disney College Program Big Bucket List — a completionist tracker for the DCP.
 
 ## Included
 - Responsive desktop/mobile layout based on the James DCP tracker
