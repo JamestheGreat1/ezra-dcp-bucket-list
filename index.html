@@ -392,6 +392,7 @@ function syncSecretAchievements(showToast=true){
   let changed=false;
   SECRET_ACHIEVEMENTS.forEach(secret=>{
     const met=secret.requires.every(id=>state[id]);
+
     if(met&&!unlocks[secret.id]){
       unlocks[secret.id]=true;
       changed=true;
@@ -399,8 +400,12 @@ function syncSecretAchievements(showToast=true){
         toast(`SECRET ACHIEVEMENT — ${secret.title}`);
         celebrate(55);
       }
+    }else if(!met&&unlocks[secret.id]){
+      delete unlocks[secret.id];
+      changed=true;
     }
   });
+
   if(changed) saveUnlocks();
   return changed;
 }
