@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#061a35">
-<title>Ezra’s DCP Bucket List</title>
+<title>Ezra’s DCP BBL</title>
 <style>
 :root{
   --bg0:#041020;--bg1:#071e3e;--bg2:#0b3266;--panel:rgba(255,255,255,.065);
@@ -216,8 +216,8 @@ button:hover,.file-btn:hover{background:rgba(255,255,255,.12);transform:translat
 
 <div class="app">
 <aside class="sidebar">
-  <div class="brand">✦ EZRA DCP COMPLETIONIST SAVE</div>
-  <h1>Ezra’s DCP <span>List.</span></h1>
+  <div class="brand">✦ EZRA’S DCP BBL</div>
+  <h1>Ezra’s DCP <span>BBL.</span></h1>
   <p class="intro">A DCP side-quest tracker built for soccer, tabletop campaigns, theme parks, wizard nonsense and questionable late-night decisions.</p>
   <div class="program-window">JAN 11 → AUG 12, 2027 · Walt Disney World</div>
   <div class="progress-box">
@@ -241,8 +241,8 @@ button:hover,.file-btn:hover{background:rgba(255,255,255,.12);transform:translat
 
 <main class="main">
   <section class="mobile-top">
-    <div class="brand">✦ EZRA DCP COMPLETIONIST SAVE</div>
-    <h1>Ezra’s DCP <span>List.</span></h1>
+    <div class="brand">✦ EZRA’S DCP BBL</div>
+    <h1>Ezra’s DCP <span>BBL.</span></h1>
     <div class="program-window">JAN 11 → AUG 12, 2027 · Walt Disney World</div>
     <div class="mobile-progress">
       <div class="ring" id="mobileRing"><strong id="mobilePct">0%</strong></div>
@@ -531,7 +531,7 @@ function applyFilters(){
 function exportProgress(){
   const payload={version:3,exportedAt:new Date().toISOString(),completed:Object.keys(state).filter(k=>state[k]),unlocks:Object.keys(unlocks).filter(k=>unlocks[k])};
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);a.download="ezra-dcp-completionist-progress.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),600);
+  a.href=URL.createObjectURL(blob);a.download="ezra-dcp-bbl-progress.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),600);
 }
 function importProgress(file){
   const r=new FileReader();r.onload=()=>{try{
