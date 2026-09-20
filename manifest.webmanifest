@@ -1,7 +1,7 @@
 {
-  "name": "Ezra's DCP Bucket List",
-  "short_name": "Ezra DCP",
-  "description": "Ezra's Disney College Program completionist bucket list and progress tracker.",
+  "name": "Ezra's DCP BBL",
+  "short_name": "DCP BBL",
+  "description": "Ezra's Disney College Program Big Bucket List and completionist progress tracker.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
