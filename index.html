@@ -210,7 +210,7 @@ button:hover,.file-btn:hover{background:rgba(255,255,255,.12);transform:translat
 .trophy-room-head h3{margin:0;font-size:1.18rem}
 .trophy-room-head p{margin:4px 0 0;color:var(--muted);font-size:.78rem;line-height:1.4}
 .trophy-room-head strong{font-size:.8rem;color:var(--orange);white-space:nowrap}
-.trophy-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.trophy-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
 .trophy-card{
   min-width:0;padding:13px;border-radius:17px;border:1px dashed rgba(255,255,255,.10);
   background:rgba(255,255,255,.025);opacity:.62;transition:.2s ease
@@ -241,6 +241,25 @@ button:hover,.file-btn:hover{background:rgba(255,255,255,.12);transform:translat
 .meta-card.unlocked{opacity:1;border-style:solid;border-color:rgba(255,145,56,.24);background:rgba(255,145,56,.07)}
 .meta-card .meta-icon{font-size:1.3rem;width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:rgba(255,255,255,.05)}
 .meta-card strong{display:block;font-size:.82rem}.meta-card span{display:block;margin-top:3px;color:var(--muted);font-size:.67rem;line-height:1.35}
+
+.item.dependency-locked{
+  opacity:.58;
+  border-style:dashed;
+  background:rgba(255,255,255,.025);
+  cursor:not-allowed
+}
+.item.dependency-locked .check{filter:grayscale(1);opacity:.7}
+.item.dependency-locked .item-label{color:#98a9bd}
+.item.dependency-locked input{pointer-events:none}
+.lock-note{
+  display:block;margin-top:5px;color:#ffbd88;font-size:.66rem;line-height:1.35;font-weight:750
+}
+.unlock-note{
+  display:block;margin-top:5px;color:var(--muted);font-size:.64rem;line-height:1.35
+}
+.badge.assigned{
+  color:#ffe0c2;border-color:rgba(255,145,56,.26);background:rgba(255,145,56,.09)
+}
 .confetti span.emoji{
   width:auto;height:auto;background:none!important;border-radius:0;font-size:20px;line-height:1;
   text-shadow:0 2px 8px rgba(0,0,0,.25)
@@ -384,7 +403,7 @@ button:hover,.file-btn:hover{background:rgba(255,255,255,.12);transform:translat
 </div>
 
 <script>
-const DATA = [{"id":"social","title":"DCP Social Life","icon":"⚽","accent":"social","description":"Friends, pickup games, tabletop chaos and late-night side quests.","items":[{"id":"soccer-dcp","label":"Play soccer with other DCP members","tier":"main","tag":"DCP"},{"id":"pickup-soccer","label":"Find a pickup soccer group","tier":"main","tag":"Soccer"},{"id":"dnd-campaign","label":"Find DCP friends and start a D&D group / campaign","tier":"rare","tag":"Campaign"},{"id":"target-trip","label":"Late-night Target trip with James & maybe others","tier":"side","tag":"Night Quest"},{"id":"bake-james","label":"Bake something with James","tier":"side","tag":"Friend Quest"}]},{"id":"disney","title":"Walt Disney World","icon":"🏰","accent":"castle","description":"The Disney completionist arc.","items":[{"id":"wdw-attractions","label":"Ride every attraction I possibly can across Walt Disney World","tier":"legendary","tag":"Completionist"},{"id":"tower-terror","label":"Ride The Twilight Zone Tower of Terror","tier":"main","tag":"Must Do"},{"id":"open-close-park","label":"Open and close a Disney park at least once","tier":"rare","tag":"Challenge"},{"id":"all-transport","label":"Ride every major mode of Disney transportation","tier":"rare","tag":"Transportation","note":"Monorail, buses, boats/ferries and Disney Skyliner."}]},{"id":"universal","title":"Universal & Epic Universe","icon":"🎢","accent":"orlando","description":"Epic Universe, Wizarding World nonsense and one very angry raptor coaster.","items":[{"id":"epic-universe","label":"Visit Epic Universe","tier":"main","tag":"Epic Universe","note":"Universal Epic Universe is currently operating."},{"id":"epic-wand","label":"Get a new interactive wand for Epic Universe","tier":"main","tag":"Wizarding World","note":"Universal’s current interactive wands can be used across all three Wizarding World lands."},{"id":"epic-all-attractions","label":"Try to ride every attraction possible at Epic Universe","tier":"legendary","tag":"Completionist"},{"id":"velocicoaster","label":"Ride Jurassic World VelociCoaster","tier":"rare","tag":"Coaster"},{"id":"butterbeer","label":"Try Butterbeer","tier":"side","tag":"Wizarding World"}]},{"id":"star-wars","title":"Star Wars Arc","icon":"⚔️","accent":"ride","description":"Acquire lightsaber. Acquire loot. Return from Batuu financially humbled.","items":[{"id":"savis","label":"Build a lightsaber at Savi’s Workshop","tier":"rare","tag":"Galaxy’s Edge","note":"Advance reservations are recommended and the experience is a separate purchase."},{"id":"star-wars-merch","label":"Bring home as much Star Wars merch as the budget reasonably allows","tier":"rare","tag":"Loot"}]}];
+const DATA = [{"id":"social","title":"DCP Social Life","icon":"⚽","accent":"social","description":"Friends, pickup games, tabletop chaos and late-night side quests.","items":[{"id":"soccer-dcp","label":"Play soccer with other DCP members","tier":"main","tag":"DCP"},{"id":"pickup-soccer","label":"Find a pickup soccer group","tier":"main","tag":"Soccer"},{"id":"dnd-campaign","label":"Find DCP friends and start a D&D group / campaign","tier":"rare","tag":"Campaign"},{"id":"target-trip","label":"Late-night Target trip with James & maybe others","tier":"side","tag":"Night Quest"},{"id":"bake-james","label":"Bake something with James","tier":"side","tag":"Friend Quest"}]},{"id":"disney","title":"Walt Disney World","icon":"🏰","accent":"castle","description":"The Disney completionist arc.","items":[{"id":"wdw-attractions","label":"Ride every attraction I possibly can across Walt Disney World","tier":"legendary","tag":"Completionist"},{"id":"tower-terror","label":"Ride The Twilight Zone Tower of Terror","tier":"main","tag":"Must Do"},{"id":"open-close-park","label":"Open and close a Disney park at least once","tier":"rare","tag":"Challenge"},{"id":"all-transport","label":"Ride every major mode of Disney transportation","tier":"rare","tag":"Transportation","note":"Monorail, buses, boats/ferries and Disney Skyliner."}]},{"id":"universal","title":"Universal & Epic Universe","icon":"🎢","accent":"orlando","description":"Epic Universe, Wizarding World nonsense and one very angry raptor coaster.","items":[{"id":"epic-universe","label":"Visit Epic Universe","tier":"main","tag":"Epic Universe","note":"Universal Epic Universe is currently operating."},{"id":"epic-wand","label":"Get a new interactive wand for Epic Universe","tier":"main","tag":"Wizarding World","note":"Universal’s current interactive wands can be used across all three Wizarding World lands."},{"id":"epic-all-attractions","label":"Try to ride every attraction possible at Epic Universe","tier":"legendary","tag":"Completionist"},{"id":"velocicoaster","label":"Ride Jurassic World VelociCoaster","tier":"rare","tag":"Coaster"},{"id":"butterbeer","label":"Try Butterbeer","tier":"side","tag":"Wizarding World"}]},{"id":"star-wars","title":"Star Wars Arc","icon":"⚔️","accent":"ride","description":"Acquire lightsaber. Acquire loot. Return from Batuu financially humbled.","items":[{"id":"savis","label":"Build a lightsaber at Savi’s Workshop","tier":"rare","tag":"Galaxy’s Edge","note":"Advance reservations are recommended and the experience is a separate purchase."},{"id":"star-wars-merch","label":"Bring home as much Star Wars merch as the budget reasonably allows","tier":"rare","tag":"Loot"}]},{"id":"james-bad-ideas","title":"James’ Bad Ideas Department","icon":"🧨","description":"Side quests issued by management. Liability waiver not included.","items":[{"id":"james-tower-night","label":"Tower Terrorist — ride Tower of Terror again after dark","tier":"rare","tag":"Assigned by James","requires":["tower-terror"],"note":"Because one Tower ride was apparently not enough."},{"id":"james-sunday-league","label":"Sunday League Regular — play with the pickup soccer group again","tier":"side","tag":"Assigned by James","requires":["soccer-dcp","pickup-soccer"]},{"id":"james-party-leader","label":"Party Leader — host or DM a full D&D session","tier":"rare","tag":"Assigned by James","requires":["dnd-campaign"]},{"id":"james-wizard-lap","label":"Wizard Completionist — do a proper spell-casting lap with the Epic Universe wand","tier":"rare","tag":"Assigned by James","requires":["epic-universe","epic-wand","butterbeer"],"note":"Make the wand purchase earn its keep."},{"id":"james-veloci-night","label":"VelociCoaster Victory Lap — ride it again after dark","tier":"rare","tag":"Assigned by James","requires":["velocicoaster"]},{"id":"james-jedi-night","label":"Jedi After Dark — bring the Savi’s lightsaber back to Galaxy’s Edge at night for a proper photo","tier":"rare","tag":"Assigned by James","requires":["savis"]},{"id":"james-transport-gremlin","label":"Transportation Gremlin — intentionally take a ridiculous multi-transfer Disney route","tier":"rare","tag":"Assigned by James","requires":["all-transport"]},{"id":"james-target-bake","label":"James’ Terrible Idea — buy one weird baking ingredient on a late Target run and use it together","tier":"rare","tag":"Assigned by James","requires":["target-trip","bake-james"]},{"id":"james-ironman","label":"Theme Park Ironman — ride an attraction at Walt Disney World and Universal on the same day","tier":"legendary","tag":"Assigned by James","requires":["tower-terror","epic-universe"]},{"id":"james-four-parks","label":"FINAL BOSS — 4 Parks in 1 Day","tier":"legendary","tag":"Assigned by James","requires":["james-tower-night","james-sunday-league","james-party-leader","james-wizard-lap","james-veloci-night","james-jedi-night","james-transport-gremlin","james-target-bake","james-ironman"],"note":"Visit all four Walt Disney World parks in one day and ride at least one attraction in each."}]}];
 const SOURCES = [["Universal Epic Universe Park Map","https://www.universalorlando.com/contentdata/uor/en/us/files/Documents/universal-epic-universe-park-map-english.pdf","Current official Epic Universe map and attraction lineup."],["Ollivanders / Interactive Wands","https://www.universalorlando.com/web/en/us/things-to-do/shopping/ollivanders-diagon-alley","Universal says current Interactive Wands can cast spells across all three Wizarding World adventures."],["Universal Islands of Adventure","https://www.universalorlando.com/web/en/us/theme-parks/islands-of-adventure","Current official listing includes Jurassic World VelociCoaster."],["Savi’s Workshop","https://disneyworld.disney.go.com/en_CA/shops/hollywood-studios/savis-workshop-handbuilt-lightsabers/","Current official Walt Disney World page for the handbuilt lightsaber experience."]];
 const STORAGE_KEY = "ezraDcpBucketList_v1";
 const COMPLETE_KEY = "ezraDcpBucketList_complete_v1";
@@ -404,11 +423,12 @@ const CATEGORY_PROFILES = {
   "social":{title:"Found the Party",emojis:["⚽","🎲"],colors:["--sky","--orange","--main"]},
   "disney":{title:"Mouse House Master",emojis:["🏰","🎢"],colors:["--sky","--orange","--main"]},
   "universal":{title:"Portal Hopper",emojis:["🪄","🎢"],colors:["--orange","--sky","--rare"]},
-  "star-wars":{title:"Jedi Loadout Complete",emojis:["⚔️","🌌"],colors:["--sky","--orange","--legendary"]}
+  "star-wars":{title:"Jedi Loadout Complete",emojis:["⚔️","🌌"],colors:["--sky","--orange","--legendary"]},
+  "james-bad-ideas":{title:"HR Would Like a Word",emojis:["🧨","😈"],colors:["--orange","--sky","--legendary"]}
 };
 const META_ACHIEVEMENTS = [
-  {id:"half-save",title:"Half the Save File",description:"Clear 2 of 4 categories at the same time.",icon:"🌓",type:"count",value:2},
-  {id:"three-down",title:"Three Down",description:"Clear 3 of 4 categories at the same time.",icon:"3️⃣",type:"count",value:3}
+  {id:"half-save",title:"Half the Save File",description:"Clear at least half of the 5 categories at the same time.",icon:"🌓",type:"count",value:3},
+  {id:"one-left",title:"One Bad Idea Left",description:"Clear 4 of 5 categories at the same time.",icon:"😈",type:"count",value:4}
 ];
 const SECRET_ACHIEVEMENTS = [
   {
@@ -464,7 +484,7 @@ const SECRET_ACHIEVEMENTS = [
   {
     id:"secret-campaign-complete",
     title:"The Campaign Is Complete",
-    description:"Clear all four DCP BBL categories at the same time.",
+    description:"Clear all five DCP BBL categories at the same time.",
     icon:"🏆",
     type:"all-categories"
   }];
@@ -616,13 +636,44 @@ function rearmIncompleteCategories(){
   if(changed)saveUnlocks();
 }
 function renderNav(){document.getElementById("nav").innerHTML=DATA.map(s=>`<a href="#${s.id}">${s.icon} ${s.title}</a>`).join("")+`<a href="#secrets">🔒 Secret Achievements</a>`}
+function itemById(id){return allItems().find(item=>item.id===id)}
+function requirementsMet(item){
+  return !item.requires||item.requires.every(id=>!!state[id]);
+}
+function prerequisiteLabel(id){
+  const item=itemById(id);
+  return item?item.label:id;
+}
+function normalizeDependencies(){
+  let changed=false,passChanged=true;
+  while(passChanged){
+    passChanged=false;
+    allItems().forEach(item=>{
+      if(item.requires&&!requirementsMet(item)&&state[item.id]){
+        state[item.id]=false;
+        changed=true;
+        passChanged=true;
+      }
+    });
+  }
+  return changed;
+}
 function itemHTML(i){
-  const verified = i.tag==="Verified" ? `<span class="badge verified">✓ current</span>` : "";
-  return `<label class="item" data-tier="${i.tier}" data-search="${(i.label+" "+i.tag+" "+(i.note||"")).toLowerCase()}">
-    <input type="checkbox" data-id="${i.id}" ${state[i.id]?"checked":""}>
+  const verified=i.tag==="Verified"?`<span class="badge verified">✓ current</span>`:"";
+  const assigned=i.tag==="Assigned by James"?`<span class="badge assigned">🧨 Assigned by James</span>`:"";
+  const unlocked=requirementsMet(i);
+  const prereqs=(i.requires||[]).map(prerequisiteLabel);
+  const dependencyNote=i.requires
+    ? (unlocked
+      ? `<span class="unlock-note">Unlocked by: ${prereqs.join(" · ")}</span>`
+      : `<span class="lock-note">🔒 Unlocks after: ${prereqs.join(" · ")}</span>`)
+    : "";
+  const searchText=(i.label+" "+i.tag+" "+(i.note||"")+" "+prereqs.join(" ")).toLowerCase();
+  return `<label class="item ${unlocked?"":"dependency-locked"}" data-tier="${i.tier}" data-search="${searchText}">
+    <input type="checkbox" data-id="${i.id}" ${state[i.id]?"checked":""} ${unlocked?"":"disabled"}>
     <span class="check"></span>
-    <span class="item-main"><span class="item-label">${i.label}</span>${i.note?`<span class="note">${i.note}</span>`:""}</span>
-    <span class="badges">${verified}<span class="badge ${tierClass(i.tier)}">${TIER_NAMES[i.tier]}</span></span>
+    <span class="item-main"><span class="item-label">${i.label}</span>${i.note?`<span class="note">${i.note}</span>`:""}${dependencyNote}</span>
+    <span class="badges">${assigned}${verified}<span class="badge ${tierClass(i.tier)}">${TIER_NAMES[i.tier]}</span></span>
   </label>`;
 }
 function renderSecrets(){
@@ -709,7 +760,7 @@ function ensureSaveClearOverlay(){
     <div class="save-clear-icon">🏆</div>
     <h2 id="saveClearTitle">SAVE FILE CLEARED</h2>
     <h3>100% EZRA%</h3>
-    <p>All four DCP BBL categories are complete. The campaign is officially cleared.</p>
+    <p>All five DCP BBL categories are complete. The campaign is officially cleared.</p>
     <div class="save-clear-trophies" id="saveClearTrophies"></div>
     <button class="primary" id="saveClearDismiss">Back to the campaign</button>
   </div>`;
@@ -744,8 +795,10 @@ function renderSections(){
   renderTrophyRoom();
   document.querySelectorAll("input[data-id]").forEach(cb=>cb.addEventListener("change",()=>{
     state[cb.dataset.id]=cb.checked;
+    normalizeDependencies();
     save();
     checkUnlocks();
+    renderSections();
     updateAll();
     applyFilters();
   }));
@@ -784,7 +837,7 @@ function updateProgress(){
 }
 function updateAll(){updateProgress();renderSummary();updateCounts();renderTrophyRoom()}
 function pickQuest(){
-  let pool=allItems().filter(i=>!state[i.id]&&i.tier!=="watch");
+  let pool=allItems().filter(i=>!state[i.id]&&i.tier!=="watch"&&requirementsMet(i));
   if(activeTier!=="all"&&["main","side","rare","legendary"].includes(activeTier)) pool=pool.filter(i=>i.tier===activeTier);
   const out=document.getElementById("missionText");
 
@@ -829,7 +882,7 @@ function importProgress(file){
     state={};obj.completed.forEach(id=>state[id]=true);
     unlocks={};(obj.unlocks||[]).forEach(id=>unlocks[id]=true);
     categoryHistory=(obj.categoryHistory&&typeof obj.categoryHistory==="object")?obj.categoryHistory:{};
-    save();saveUnlocks();saveCategoryHistory();
+    normalizeDependencies();save();saveUnlocks();saveCategoryHistory();
     rearmIncompleteCategories();syncMetaAchievements(false);syncSecretAchievements(false);
     renderSections();updateAll();applyFilters();
     toast("Progress imported — the campaign continues ✨");
@@ -853,7 +906,7 @@ document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{
 ["desktopExport","mobileExport"].forEach(id=>{const e=document.getElementById(id);if(e)e.addEventListener("click",exportProgress)});
 ["desktopImport","mobileImport"].forEach(id=>{const e=document.getElementById(id);if(e)e.addEventListener("change",ev=>{if(ev.target.files?.[0])importProgress(ev.target.files[0]);ev.target.value=""})});
 document.getElementById("desktopReset").addEventListener("click",resetProgress);
-rearmIncompleteCategories();syncMetaAchievements(false);syncSecretAchievements(false);renderNav();renderSections();renderSummary();updateProgress();renderSources();applyFilters();
+normalizeDependencies();save();rearmIncompleteCategories();syncMetaAchievements(false);syncSecretAchievements(false);renderNav();renderSections();renderSummary();updateProgress();renderSources();applyFilters();
 </script>
 
 <script>
